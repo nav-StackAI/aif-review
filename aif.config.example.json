@@ -1,0 +1,26 @@
+{
+  "context": "Describe your project here. Example: Express REST API with PostgreSQL, serving a React frontend. Solo developer.",
+  "models": [
+    {
+      "name": "Groq Llama 3.3 70B",
+      "shortName": "Groq-Llama70",
+      "provider": "groq",
+      "model": "llama-3.3-70b-versatile",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Gemini 2.5 Flash",
+      "shortName": "Gemini",
+      "provider": "gemini",
+      "model": "gemini-2.5-flash",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Claude Sonnet 4",
+      "shortName": "Claude",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "maxTokens": 4096
+    }
+  ]
+}

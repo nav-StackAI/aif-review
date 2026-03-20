@@ -1,0 +1,41 @@
+{
+  "name": "aif-review",
+  "version": "1.0.0",
+  "description": "AIF — Adversarial multi-model code review. Pit multiple LLMs against your code simultaneously, cross-reference their findings, and interactively triage the results.",
+  "type": "module",
+  "main": "aif-review.js",
+  "bin": {
+    "aif": "./aif-review.js",
+    "aif-setup": "./setup.js"
+  },
+  "scripts": {
+    "review": "node aif-review.js",
+    "setup": "node setup.js"
+  },
+  "keywords": [
+    "code-review",
+    "llm",
+    "ai",
+    "adversarial",
+    "multi-model",
+    "security",
+    "audit",
+    "static-analysis",
+    "groq",
+    "cerebras",
+    "mistral",
+    "gemini",
+    "openrouter",
+    "anthropic",
+    "openai"
+  ],
+  "author": "GoXero (https://goxero.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naveenbshastry/aif-review"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

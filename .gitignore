@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.env.local
+AIF-REVIEW-*.md
+AIF-REVIEW-*.json
+.DS_Store
