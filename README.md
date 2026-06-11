@@ -2,7 +2,7 @@
 
 **Adversarial Multi-Model Code Review**
 
-Pit multiple LLMs against your code simultaneously. Each model independently hunts for security vulnerabilities, reliability issues, performance problems, and architectural flaws. AIF cross-references their findings to surface what matters — issues flagged by multiple models get priority, noise from single models gets filtered.
+Pit multiple LLMs against your code — or any document — simultaneously. Each model independently hunts for security vulnerabilities, reliability issues, performance problems, and architectural flaws. AIF cross-references their findings to surface what matters — issues flagged by multiple models get priority, noise from single models gets filtered.
 
 Built and open-sourced by [GoXero](https://goxero.com).
 
@@ -89,6 +89,26 @@ node aif-review.js --dir ../your-project/src/ --ext .js,.ts
 4. **Synthesize** — Deduplicates across models, identifies cross-model agreement
 5. **Triage** — Interactive review: you evaluate each finding (VALID / REJECT / DEFER / etc.)
 6. **Report** — Generates Markdown and JSON reports with prioritized fix lists
+
+## Document Review (Python runner — AIF v2)
+
+The framework matured beyond code: `aif_review.py` runs **any document** (a product brief, a design doc, a strategy memo) through an adversarial multi-model review. Same philosophy, hardened by real runs:
+
+```bash
+python3 aif_review.py --doc ./your-doc.md --angle generic --model gemini
+python3 aif_review.py --doc ./your-doc.md --angle generic --model mistral --run-id AIF_007
+python3 aif_review.py --doc ./your-doc.md --angle generic --model groq  --run-id AIF_007
+```
+
+**What v2 learned the hard way (lessons baked into the code):**
+
+- **Raw HTTP, zero SDKs** — no install step, no SDK-version churn
+- **One model per invocation** — a slow or failing model never blocks the others; each call stays inside tight sandbox/CI time caps
+- **Bounded thinking budgets** — a thinking model starved of output tokens returns *empty*; give it a budget, cap the total
+- **Send a real User-Agent** — Cloudflare's WAF silently 403s default Python user agents; that error is easy to misread as a dead API key
+- **Respect free-tier TPM ceilings** — truncate oversized docs before sending
+
+Review *angles* are prompt templates (see `ANGLES` in the script) — write your own for your domain. The included `gamification` angle is a real one used to stress-test a live product's design brief, included as an example of how specific an angle should be.
 
 ## Agreement Levels
 
